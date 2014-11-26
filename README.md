@@ -1,6 +1,6 @@
 # Prattle
 
-Prattle is a Rail engine providing forum functionality. It provides basic forum, topic and post functionality to the parent application.
+Prattle is a Rails engine providing forum functionality. It provides basic forum, topic and post functionality to the parent application.
 
 # Installation
 
@@ -16,7 +16,6 @@ gem 'prattle', :github => "lyneux/prattle"
 Create a prattle.rb file in config/initalizers
 
 ```ruby
-# 
 Prattle.user_class  = "Your user class"
 Prattle::ApplicationController.layout "Your layout"
 ```
@@ -34,7 +33,7 @@ Prattle::ApplicationController.layout "Your layout"
 In your parent app:
 
 ```shell
-	rake prattle:install:migrations
-	rake db:migrate
+rake prattle:install:migrations
+rake db:migrate
 ```
 
