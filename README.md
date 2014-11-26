@@ -2,6 +2,8 @@
 
 Prattle is a Rails engine providing forum functionality. It provides basic forum, topic and post functionality to the parent application.
 
+Prattle focuses on sensible functionality ahead of Ruby-on-Rails cleverness to deliver a forum that works rationally and looks great.
+
 # Installation
 
 Installing prattle is simple:
