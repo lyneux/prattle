@@ -7,11 +7,10 @@ require "prattle/version"
 Gem::Specification.new do |s|
   s.name        = "prattle"
   s.version     = Prattle::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Prattle."
-  s.description = "TODO: Description of Prattle."
+  s.authors     = ["Guy Molyneux"]
+  s.homepage    = "https://github.com/lyneux/prattle"
+  s.summary     = "Rails forum engine"
+  s.description = "A no-nonsense rails forum engine"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
