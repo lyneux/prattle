@@ -1,0 +1,40 @@
+# Prattle
+
+Prattle is a Rail engine providing forum functionality. It provides basic forum, topic and post functionality to the parent application.
+
+# Installation
+
+Installing prattle is simple:
+
+## Specify Gem dependencies
+
+```ruby
+gem 'prattle', :github => "lyneux/prattle"
+```
+
+## Add an initialiser to the parent app:
+Create a prattle.rb file in config/initalizers
+
+```ruby
+# 
+Prattle.user_class  = "Your user class"
+Prattle::ApplicationController.layout "Your layout"
+```
+## Add a prattle_user helper method to your Application Controller
+
+```ruby
+  def prattle_user
+    current_member
+  end
+  helper_method :prattle_user
+```
+
+## Copy over and run the migrations
+
+In your parent app:
+
+```shell
+	rake prattle:install:migrations
+	rake db:migrate
+```
+

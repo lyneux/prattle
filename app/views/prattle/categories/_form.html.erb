@@ -1,0 +1,29 @@
+<%= form_for(@category, :html => { :class => "form-horizontal", :role => "form" }) do |f| %>
+<% if @category.errors.any? %>
+  <div id="errorExplanation" class="alert alert-danger" style="padding-top: 0px;">
+    <h3><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h3>
+    <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-xs-4 control-label"  %>
+    <div class="col-xs-8"><%= f.text_field :name, class: "form-control" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, class: "col-xs-4 control-label"  %>
+    <div class="col-xs-8"><%= f.text_area :description, class: "form-control" %></div>
+  </div>
+
+    <%= f.submit class: "btn btn-sm btn-primary" %>
+
+    <%= link_to_if @category.new_record?, "Cancel", categories_path, class: "btn btn-sm btn-default" do
+          link_to "Cancel", category_path(@category), class: "btn btn-sm btn-default"
+        end
+    %>
+<% end %>

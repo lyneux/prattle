@@ -1,0 +1,32 @@
+<h1>Forums / <%= link_to @forum.category.name, @forum.category %> / <%= @forum.name %></h1>
+<p><%= @forum.description %></p>
+<p><%= link_to 'Edit Forum', edit_category_forum_path(@forum.category, @forum), class: "btn btn-sm btn-danger" %></p>
+
+<% if @forum.topics.empty? %>
+	<p>There are no topics in this forum yet.</p>
+<% else %>
+
+	<table>
+		<thead>
+		  <tr>
+		    <th>Topic</th>
+		    <th>Latest</th>
+		    <th>Posts</th>
+		    <th>Views</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <% @forum.topics.each do |topic| %>
+		    <tr>
+		      <td><h3><%= link_to topic.subject, category_forum_topic_path(@forum.category, @forum, topic) %></h3></td>
+		      <td><%= topic.posts.last.created_at %></td>
+		      <td><%= topic.posts.count %></td>
+		      <td><%= topic.views %></td>
+		      <td></td>
+		    </tr>
+		  <% end %>
+		</tbody>
+	</table>
+<% end %>
+
+<p><%= link_to 'View Forums', category_forums_path(@forum.category), class: "btn btn-sm btn-primary"  %></p>
