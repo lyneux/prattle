@@ -8,14 +8,23 @@
 
 	<% @topic.posts.each do |post| %>
 
-		<div class="well">
-			<div class="row">
-				<div class="user col-md-2">
-					<%= post.user || "Deleted User" %></br>
-					<%= post.created_at %>
-				</div>
-				<div class="user col-md-7">
-					<%= post.text %>
+		<div class="panel panel-default">
+			
+			<div class="panel-heading">
+				<h1 class="panel-title">
+					<%= post.user || "Deleted User" %>
+					<div class="pull-right"><%= post.topic_position %></div>
+				</h1>
+			</div>
+
+			<div class="panel-body">
+				<div class="row">
+					<div class="user col-md-2">
+						<%= post.created_at.strftime("%d %B %Y") %> - <%= post.created_at.strftime("%H:%M") %>
+					</div>
+					<div class="user col-md-7">
+						<%= post.text %>
+					</div>
 				</div>
 			</div>
 		</div>
