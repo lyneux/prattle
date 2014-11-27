@@ -3,6 +3,7 @@ PATH
   specs:
     prattle (0.0.1)
       rails (~> 4.0.3)
+      will_paginate-bootstrap (~> 1.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -72,6 +73,9 @@ GEM
     thread_safe (0.3.4)
     tilt (1.4.1)
     tzinfo (0.3.42)
+    will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -79,3 +83,4 @@ PLATFORMS
 DEPENDENCIES
   prattle!
   sqlite3
+  will_paginate-bootstrap

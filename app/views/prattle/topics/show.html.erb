@@ -6,7 +6,9 @@
 	<p>There are no posts in this topic yet.</p>
 <% else %>
 
-	<% @topic.posts.each do |post| %>
+	<%= will_paginate @posts, :renderer => BootstrapPagination::Rails %>
+
+	<% @posts.each do |post| %>
 
 		<div class="panel panel-default">
 			
@@ -30,6 +32,8 @@
 		</div>
 
 	<% end %>
+
+	<%= will_paginate @posts, :style => "margin-top: 0px", :renderer => BootstrapPagination::Rails %>
 
 	<%= render "prattle/posts/form" %>
 
