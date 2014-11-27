@@ -10,6 +10,7 @@ module Prattle
     end
 
     def show
+      @topics = @forum.topics.by_most_recent.paginate(:page => params[:page], :per_page => 25)
     end
 
     def edit

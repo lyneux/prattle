@@ -19,7 +19,7 @@
 		  </tr>
 		</thead>
 		<tbody>
-		  <% @category.forums.each do |forum| %>
+		  <% @category.forums.by_name.each do |forum| %>
 		    <tr>
 		      <td><h3><%= link_to forum.name, category_forum_path(@category, forum) %></h3><%= forum.description %></td>
 		      <td><%= forum.topics.count %></td>

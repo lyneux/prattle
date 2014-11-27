@@ -9,20 +9,23 @@
 	<p>There are no topics in this forum yet.</p>
 <% else %>
 
+	<%= will_paginate @topics, :renderer => BootstrapPagination::Rails %>
+
 	<table>
 		<thead>
 		  <tr>
 		    <th>Topic</th>
-		    <th>Latest</th>
+		    <th>Latest Post</th>
 		    <th>Posts</th>
 		    <th>Views</th>
 		  </tr>
 		</thead>
 		<tbody>
-		  <% @forum.topics.each do |topic| %>
+		  <% @topics.each do |topic| %>
 		    <tr>
 		      <td><h3><%= link_to topic.subject, category_forum_topic_path(@forum.category, @forum, topic) %></h3></td>
-		      <td><%= topic.posts.last.created_at if topic.posts.last %></td>
+		      <td><%= topic.posts.last.created_at.strftime("%d %B %Y") if topic.posts.last %><br/>
+		      	<%= topic.posts.last.updated_at.strftime("%H:%M") if topic.posts.last %></td>
 		      <td><%= topic.posts.count %></td>
 		      <td><%= topic.views %></td>
 		      <td></td>
@@ -30,6 +33,9 @@
 		  <% end %>
 		</tbody>
 	</table>
+
+	<%= will_paginate @topics, :renderer => BootstrapPagination::Rails %>
+	
 <% end %>
 
 <p><%= link_to 'View Forums', category_forums_path(@forum.category), class: "btn btn-sm btn-primary"  %></p>
