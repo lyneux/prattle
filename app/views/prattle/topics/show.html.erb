@@ -25,7 +25,7 @@
 						<%= post.created_at.strftime("%d %B %Y") %> - <%= post.created_at.strftime("%H:%M") %>
 					</div>
 					<div class="user col-md-7">
-						<%= post.text %>
+						<%= format_post_text(post.text) %>
 					</div>
 				</div>
 			</div>

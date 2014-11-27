@@ -14,3 +14,5 @@ gemspec
 # gem 'debugger'
 
 gem 'will_paginate-bootstrap'
+gem 'sanitize'
+gem 'bb-ruby'
