@@ -11,7 +11,8 @@ module Prattle
       @post.user = prattle_user
       @post.save
 
-      redirect_to [@post.topic.forum.category, @post.topic.forum, @post.topic], :flash => {:success => "Post created"}
+      posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
+      redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => posts.total_pages.to_s, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post created"})
       
     end
  
@@ -25,6 +26,7 @@ module Prattle
   		def post_params
     		params.require(:post).permit(:text)
   		end
+
 	end
 	
 end
