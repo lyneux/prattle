@@ -3,10 +3,11 @@ module Prattle
   	belongs_to :forum
   	has_many :posts
   	validates :view_count, presence: true
+    validates :last_post_at, presence: true
 
   	after_initialize :defaults
 
-  	scope :by_most_recent, -> { order(updated_at: :desc) }
+  	scope :by_most_recent, -> { order(last_post_at: :desc) }
 
   	def read_up_to_post(user)
   		Prattle::TopicReadUpToMark.find_by(topic_id: self.id, user_id: user.id)

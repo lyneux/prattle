@@ -1,6 +1,6 @@
 module Prattle
   class Post < ActiveRecord::Base
-  	belongs_to :topic, touch: true
+  	belongs_to :topic
   	belongs_to :user, class_name: Prattle.user_class.to_s
   	#validates :text, presence: true, length: {minimum: 5 }
   	#validates :topic_position, presence: true

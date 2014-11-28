@@ -3,7 +3,7 @@ require_dependency "prattle/application_controller"
 module Prattle
   class TopicsController < ApplicationController
     before_action :set_topic, only: [:show, :edit, :update, :destroy]
-    after_action :update_topic_read_up_to_mark, only: [:show]
+    after_action :update_topic_read_up_to_mark, only: [:show, :create]
     after_action :increment_topic_views, only: [:show]
 
     def new
@@ -14,9 +14,12 @@ module Prattle
 
     def create
       @forum = Forum.find(params[:forum_id])
+      
       @topic = @forum.topics.create(topic_params)
-      @post = @topic.posts.create(post_params)
+      @topic.last_post_at = DateTime.now
+      @topic.save
 
+      @post = @topic.posts.create(post_params)
       @post.user = prattle_user
       @post.save
 
@@ -36,7 +39,14 @@ module Prattle
 
       def update_topic_read_up_to_mark
         topic_read_up_to_mark = Prattle::TopicReadUpToMark.find_or_initialize_by(topic_id: @topic.id, user_id: prattle_user.id)
-        topic_read_up_to_mark.post = @posts.last
+        if @posts.nil?
+          #We've just done a create. Assume that the whole topic is read
+          topic = Prattle::Topic.find_by(id: @topic.id)
+          topic_read_up_to_mark.post = topic.posts.last
+        else
+          #Assume we've only read to the end of the current page of posts
+          topic_read_up_to_mark.post = @posts.last
+        end
         topic_read_up_to_mark.save
       end
 
