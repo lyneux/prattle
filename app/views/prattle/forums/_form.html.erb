@@ -23,7 +23,7 @@
     <%= f.submit class: "btn btn-sm btn-primary" %>
 
     <%= link_to_if @forum.new_record?, "Cancel", categories_path(@forum.category), class: "btn btn-sm btn-default" do
-          link_to "Cancel", category_forums_path(@forum), class: "btn btn-sm btn-default"
+          link_to "Cancel", category_forum_path(@forum.category, @forum), class: "btn btn-sm btn-default"
         end
     %>
 
