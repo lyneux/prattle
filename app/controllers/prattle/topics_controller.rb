@@ -3,6 +3,8 @@ require_dependency "prattle/application_controller"
 module Prattle
   class TopicsController < ApplicationController
     before_action :set_topic, only: [:show, :edit, :update, :destroy]
+    after_action :update_topic_read_up_to_mark, only: [:show]
+    after_action :increment_topic_views, only: [:show]
 
     def new
       @topic = Topic.new
@@ -30,6 +32,17 @@ module Prattle
       # Use callbacks to share common setup or constraints between actions.
       def set_topic
         @topic = Topic.find(params[:id])
+      end
+
+      def update_topic_read_up_to_mark
+        topic_read_up_to_mark = Prattle::TopicReadUpToMark.find_or_initialize_by(topic_id: @topic.id, user_id: prattle_user.id)
+        topic_read_up_to_mark.post = @posts.last
+        topic_read_up_to_mark.save
+      end
+
+      def increment_topic_views
+        topic = Prattle::Topic.find_by(id: @topic.id)
+        topic.increment_views
       end
 
   		def topic_params

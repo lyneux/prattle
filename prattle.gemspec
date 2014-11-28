@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'will_paginate-bootstrap', '~> 1.0.1'
   s.add_dependency 'sanitize', '2.0.6'
   s.add_dependency 'bb-ruby'
+  s.add_dependency 'decorators', '~> 1.0.3'
 
   s.add_development_dependency "sqlite3"
 end
