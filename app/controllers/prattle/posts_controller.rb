@@ -17,6 +17,18 @@ module Prattle
       posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
       redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => posts.total_pages.to_s, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post created"})
     end
+
+    def edit
+    end
+
+    def update
+      if @post.update(post_params)
+        #redirect_to [@post.topic.forum.category, @post.topic.forum, @post.topic], :flash => {:success => "Post updated"}
+        redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => @post.page, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post updated"})
+      else
+        render :edit
+      end
+    end
  
 	private
 

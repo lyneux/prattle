@@ -7,6 +7,10 @@ module Prattle
 
   	before_save :set_topic_position
 
+    def page
+      page = (((self.topic_position-1)/25)+1).floor
+    end
+
   	private
   		def set_topic_position
   			if self.new_record?

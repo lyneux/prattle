@@ -1,0 +1,15 @@
+<h1>Edit Post</h1>
+
+<%= form_for [@post.topic.forum.category, @post.topic.forum, @post.topic, @post],  :html => { :class => "form-horizontal", :role => "form" } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :text, "Text", class: "col-xs-2 control-label"  %>
+    <div class="col-xs-10">
+      <%= f.text_area :text, :rows => 5, class: "form-control" %><br>
+
+      <%= f.submit "Update Post", class: "btn btn-sm btn-primary" %>
+    </div>
+  </div>
+
+  
+<% end %>

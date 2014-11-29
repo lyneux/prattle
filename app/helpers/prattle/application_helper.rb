@@ -6,5 +6,9 @@ module Prattle
   		BBRuby.to_html_with_formatting(sanitized).html_safe if sanitized
   	end
 
+  	def admin_or_own_post?(post)
+  		prattle_admin? || (post.user == prattle_user)
+  	end
+
   end
 end
