@@ -1,10 +1,12 @@
 <h1><%= link_to "Forums", prattle.root_path %> / <%= @category.name %></h1>
 
 <p><%= @category.description %></p>
-<p>
-	<%= link_to 'Edit Category', edit_category_path(@category), class: "btn btn-sm btn-danger" %>
-	<%= link_to 'New Forum', new_category_forum_path(@category), class: "btn btn-sm btn-danger" %>
-</p>
+<% if prattle_admin? %>
+	<p>
+		<%= link_to 'Edit Category', edit_category_path(@category), class: "btn btn-sm btn-danger" %>
+		<%= link_to 'New Forum', new_category_forum_path(@category), class: "btn btn-sm btn-danger" %>
+	</p>
+<% end %>
 
 <% if @category.forums.empty? %>
 	<p>There are no forums in this category yet.</p>

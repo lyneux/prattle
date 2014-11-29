@@ -1,7 +1,9 @@
 <h1><%= link_to "Forums", prattle.root_path %> / <%= link_to @forum.category.name, @forum.category %> / <%= @forum.name %></h1>
 <p><%= @forum.description %></p>
 <p>
-	<%= link_to 'Edit Forum', edit_category_forum_path(@forum.category, @forum), class: "btn btn-sm btn-danger" %>
+	<% if prattle_admin? %>
+		<%= link_to 'Edit Forum', edit_category_forum_path(@forum.category, @forum), class: "btn btn-sm btn-danger" %>
+	<% end %>
 	<%= link_to 'New Topic', new_category_forum_topic_path(@forum.category, @forum), class: "btn btn-sm btn-primary" %>
 	<%= link_to 'Mark All Posts As Read', category_forum_mark_as_read_path(@forum.category, @forum), class: "btn btn-sm btn-primary", onclick: "$(this).button('loading');" %>
 </p>

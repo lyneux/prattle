@@ -1,6 +1,7 @@
 <h1><%= link_to "Forums", prattle.root_path %></h1>
-
-<%= link_to 'New Category', new_category_path, class: "btn btn-sm btn-danger" %>
+<% if prattle_admin? %>
+  <%= link_to 'New Category', new_category_path, class: "btn btn-sm btn-danger" %>
+<% end %>
 
 <% @categories.each do |category| %>
   <h2><%= link_to category.name, category %></h2>
