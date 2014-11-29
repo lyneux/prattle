@@ -1,4 +1,4 @@
-<h1>Forums / <%= link_to @forum.category.name, @forum.category %> / <%= @forum.name %></h1>
+<h1><%= link_to "Forums", prattle.root_path %> / <%= link_to @forum.category.name, @forum.category %> / <%= @forum.name %></h1>
 <p><%= @forum.description %></p>
 <p>
 	<%= link_to 'Edit Forum', edit_category_forum_path(@forum.category, @forum), class: "btn btn-sm btn-danger" %>
