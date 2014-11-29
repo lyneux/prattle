@@ -3,7 +3,7 @@
   <div class="form-group">
     <%= f.label :text, "Reply", class: "col-xs-2 control-label"  %>
     <div class="col-xs-10">
-      <%= f.text_area :text, class: "form-control" %><br>
+      <%= f.text_area :text, :rows => 5, class: "form-control" %><br>
 
       <%= f.submit "Post Reply", class: "btn btn-sm btn-primary" %>
     </div>
