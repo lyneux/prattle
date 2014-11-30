@@ -21,9 +21,9 @@
 		      <td>
 		      	<h4>
 		      		<%= link_to topic.subject, category_forum_topic_path(@forum.category, @forum, topic) %>
-		      		<% if show_new_marker(topic) %>
+		      		<% if show_new_marker(topic, @prattle_user) %>
 		      			<span class="badge">
-		      				<%= link_to_latest_unread_post(topic) %>
+		      				<%= link_to_latest_unread_post(topic, @prattle_user) %>
 		      			</span>
 		      		<% end %>
 		      	</h4>

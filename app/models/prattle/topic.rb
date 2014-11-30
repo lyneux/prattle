@@ -10,7 +10,7 @@ module Prattle
   	scope :by_most_recent, -> { order(last_post_at: :desc) }
 
   	def read_up_to_post(user)
-  		Prattle::TopicReadUpToMark.find_by(topic_id: self.id, user_id: user.id)
+  		Prattle::TopicReadUpToMark.includes(:post).find_by(topic_id: self.id, user_id: user.id)
   	end
 
   	def increment_views

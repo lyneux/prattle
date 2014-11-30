@@ -10,7 +10,8 @@ module Prattle
     end
 
     def show
-      @topics = @forum.topics.by_most_recent.paginate(:page => params[:page], :per_page => 25)
+      @prattle_user = prattle_user
+      @topics = Prattle::Topic.where(:forum_id => @forum.id).includes(:posts).order(last_post_at: :desc).paginate(:page => params[:page], :per_page => 25)
     end
 
     def edit

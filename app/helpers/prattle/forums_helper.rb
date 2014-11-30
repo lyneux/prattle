@@ -1,8 +1,8 @@
 module Prattle
   module ForumsHelper
 
-  	def show_new_marker(topic)
-      read_up_to_post = topic.read_up_to_post(prattle_user)
+  	def show_new_marker(topic, user)
+      read_up_to_post = topic.read_up_to_post(user)
   		if read_up_to_post && topic.posts
   			if topic.posts.last.topic_position == read_up_to_post.post.topic_position
   				false
@@ -14,9 +14,9 @@ module Prattle
   		end
   	end
 
-    def link_to_latest_unread_post(topic)
+    def link_to_latest_unread_post(topic, user)
       latest_unread_post = 1
-      read_up_to_post = topic.read_up_to_post(prattle_user)
+      read_up_to_post = topic.read_up_to_post(user)
       if read_up_to_post
         read_up_to_topic_position = read_up_to_post.post.topic_position
         latest_unread_post = read_up_to_topic_position
