@@ -5,7 +5,7 @@ require 'bb-ruby'
 require 'decorators'
 
 module Prattle
-	mattr_accessor :user_class, :current_user_method
+	mattr_accessor :user_class, :current_user_method, :single_category_site
 
 	class << self
 		def user_class
@@ -17,5 +17,9 @@ module Prattle
 	        end
 	      end
 	    end
+
+		def single_category_site
+			@@single_category_site || true
+		end
 	end
 end

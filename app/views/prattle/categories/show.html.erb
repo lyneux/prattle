@@ -1,4 +1,10 @@
-<h1><%= link_to "Forums", prattle.root_path %> / <%= @category.name %></h1>
+<h6>
+	<%= link_to "Forums", prattle.root_path %>
+	<div class="pull-right">
+		<%= link_to 'Recent Posts', show_recent_topics_path, class: "btn btn-sm btn-default" %>
+	</div>
+<h6>
+<h1 style="margin-top:0px"><%= @category.name %></h1>
 
 <p><%= @category.description %></p>
 <% if prattle_admin? %>

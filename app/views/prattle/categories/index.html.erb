@@ -1,4 +1,9 @@
-<h1><%= link_to "Forums", prattle.root_path %></h1>
+<h1 style="margin-top:10px" >
+  <%= link_to "Forums", prattle.root_path %>
+  <div class="pull-right">
+    <%= link_to 'Recent Posts', show_recent_topics_path, class: "btn btn-sm btn-default" %>
+  </div>
+</h1>
 <% if prattle_admin? %>
   <%= link_to 'New Category', new_category_path, class: "btn btn-sm btn-danger" %>
 <% end %>
@@ -10,7 +15,10 @@
     <tbody>
       <% category.forums.each do |forum| %>
         <tr>
-          <td><h3><%= link_to forum.name, category_forum_path(category, forum) %></h3><%= forum.description %></td>
+          <td>
+            <h3><%= link_to forum.name, category_forum_path(category, forum) %></h3>
+            <%= forum.description %>
+          </td>
           <td>
               <span class="badge"><%= forum.topics.count %></span> topics<br/>
               <span class="badge"><%= forum.posts.count %></span> posts

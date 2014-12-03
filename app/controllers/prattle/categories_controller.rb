@@ -6,6 +6,7 @@ module Prattle
 
     # GET /categories
     def index
+      redirect_to Category.first if Prattle.single_category_site
       @categories = Category.all
     end
 
