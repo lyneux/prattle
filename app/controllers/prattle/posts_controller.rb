@@ -4,29 +4,50 @@ module Prattle
   class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-    def create
+    def new
       @topic = Topic.find(params[:topic_id])
-      @post = @topic.posts.create(post_params)
+      @post = @topic.posts.build
+      @attachment = Attachment.new
+    end
 
-      @post.user = prattle_user
-      @post.save
+    def create
+      if params[:preview]
+        @topic = Topic.find(params[:topic_id])
+        @post.text = post_params[:text]
+        render :new
+      else
+        @topic = Topic.find(params[:topic_id])
+        @post = @topic.posts.create(post_params)
 
-      @topic.last_post_at = @post.created_at
-      @topic.save
+        @post.user = prattle_user
+        @post.save
 
-      posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
-      redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => posts.total_pages.to_s, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post created"})
+        @topic.last_post_at = @post.created_at
+        @topic.save
+
+        posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
+        redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => posts.total_pages.to_s, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post created"})
+      end
     end
 
     def edit
+      @topic = Topic.find(params[:topic_id])
     end
 
     def update
-      if @post.update(post_params)
-        #redirect_to [@post.topic.forum.category, @post.topic.forum, @post.topic], :flash => {:success => "Post updated"}
-        redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => @post.page, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post updated"})
-      else
+      if params[:preview]
+        @topic = Topic.find(params[:topic_id])
+        @post.text = post_params[:text]
         render :edit
+      else
+
+        if @post.update(post_params)
+          #redirect_to [@post.topic.forum.category, @post.topic.forum, @post.topic], :flash => {:success => "Post updated"}
+          redirect_to category_forum_topic_path(:category_id => @post.topic.forum.category.id, :id => @post.topic.id, :forum_id => @post.topic.forum.id, :page => @post.page, :anchor => "post" + @post.topic_position.to_s,  :flash => {:success => "Post updated"})
+        else
+          render :edit
+        end
+
       end
     end
  
@@ -38,7 +59,7 @@ module Prattle
       end
 
   		def post_params
-    		params.require(:post).permit(:text)
+    		params.require(:post).permit(:text, :attachment)
   		end
 
 	end
