@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+			
+	<div class="panel-heading">
+		<h1 class="panel-title">
+			<%= post.user || "Deleted User" %>
+			<div class="pull-right">
+				<% if admin_or_own_post?(post) %>
+					<%= link_to 'Edit', edit_category_forum_topic_post_path(post.topic.forum.category, post.topic.forum, post.topic, post), class: "btn btn-xs btn-primary" %>
+				<% end %>
+				<a name="post<%= post.topic_position %>"><%= post.topic_position %></a>
+			</div>
+		</h1>
+	</div>
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="user col-md-2">
+				<%= post.created_at.strftime("%d %b %Y") %> - <%= post.created_at.strftime("%H:%M") %>
+				<%= image_tag post.user.prattle_image.url(:thumb), :class => "img-rounded img-responsive", :style => "margin-top: 5px;" %>
+			</div>
+			<div class="user col-md-7">
+				<%= format_post_text(post.text) %>
+				<% if post.created_at != post.updated_at %>
+					<small><strong>Last edited on: <%= post.updated_at.strftime("%d %B %Y") %> - <%= post.updated_at.strftime("%H:%M") %></strong></small>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

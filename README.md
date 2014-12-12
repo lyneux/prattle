@@ -29,6 +29,17 @@ This allows prattle to link posts to the user who is currently logged into your 
     current_member
   end
   helper_method :prattle_user
+
+
+```
+
+## Add a prattle_image helper method to your member class
+This allows prattle to display an avatar image for your user (uses a paperclip image)
+
+```ruby
+  def prattle_image
+    image
+  end
 ```
 
 ## Add a prattle_admin? helper method to your session helper

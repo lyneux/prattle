@@ -1,0 +1,11 @@
+<%= form_for [@topic.forum.category, @topic.forum, @topic, @post],  :html => { :class => "form-horizontal", :role => "form" } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :text, "Quick Reply", class: "col-xs-2 control-label"  %>
+    <div class="col-xs-10">
+      <%= f.text_area :text, :rows => 5, class: "form-control" %><br/>
+      <%= f.submit "Post Reply", class: "btn btn-sm btn-primary" %>
+    </div>
+  </div>
+
+<% end %>
