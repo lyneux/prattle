@@ -27,6 +27,7 @@ module Prattle
     end
 
     def show
+      @post = @topic.posts.build
       @posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
     end
  
