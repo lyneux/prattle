@@ -6,9 +6,20 @@
 		<%= link_to 'Recent Posts', show_recent_topics_path, class: "btn btn-sm btn-default" %>
 	</div>
 </h6>
-<h1 style="margin-top:0px"><%= @topic.subject %></h1>
+<h1 style="margin-top:0px">
+	<%= @topic.formatted_subject %>
+</h1>
 
-<p><%= link_to 'Edit Topic', edit_category_forum_topic_path(@topic.forum.category, @topic.forum, @topic), class: "btn btn-sm btn-danger" %></p>
+<% if prattle_admin? %>
+	<p>
+		<%= link_to 'Edit Topic', edit_category_forum_topic_path(@topic.forum.category, @topic.forum, @topic), class: "btn btn-sm btn-danger" %>
+		<% if @topic.locked %>
+			<%= link_to 'Unlock', category_forum_topic_unlock_path(@topic.forum.category, @topic.forum, @topic), class: "btn btn-sm btn-danger" %>
+		<% else %>
+			<%= link_to 'Lock', category_forum_topic_lock_path(@topic.forum.category, @topic.forum, @topic), class: "btn btn-sm btn-danger" %>
+		<% end %>
+	</p>
+<% end %>
 
 <% if @topic.posts.empty? %>
 	<p>There are no posts in this topic yet.</p>
@@ -20,7 +31,9 @@
 
 	<%= will_paginate @posts, :style => "margin-top: 0px", :renderer => BootstrapPagination::Rails, class: 'pagination-sm'   %>
 
-	<%= render "prattle/posts/quick_form" %>
+	<% unless @topic.locked %>
+		<%= render "prattle/posts/quick_form" %>
+	<% end %>
 
 <% end %>
 

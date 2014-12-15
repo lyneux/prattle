@@ -1,8 +1,11 @@
 require_dependency "prattle/application_controller"
 
+include Prattle::ApplicationHelper
+
 module Prattle
   class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
+    before_action :can_edit?, only: [:edit, :update]
 
     def new
       @topic = Topic.find(params[:topic_id])
@@ -56,6 +59,10 @@ module Prattle
       # Use callbacks to share common setup or constraints between actions.
       def set_post
         @post = Post.find(params[:id])
+      end
+
+      def can_edit?
+        redirect_to category_forum_topic_path(@post.topic.forum.category, @post.topic.forum, @post.topic), :flash => {:danger => "You are not allowed to perform that operation"} unless edit_post?(@post)
       end
 
   		def post_params

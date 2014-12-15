@@ -4,7 +4,7 @@
 		<h1 class="panel-title">
 			<%= post.user || "Deleted User" %>
 			<div class="pull-right">
-				<% if admin_or_own_post?(post) %>
+				<% if edit_post?(post) %>
 					<%= link_to 'Edit', edit_category_forum_topic_post_path(post.topic.forum.category, post.topic.forum, post.topic, post), class: "btn btn-xs btn-primary" %>
 				<% end %>
 				<a name="post<%= post.topic_position %>"><%= post.topic_position %></a>

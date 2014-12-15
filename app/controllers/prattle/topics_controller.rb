@@ -2,7 +2,7 @@ require_dependency "prattle/application_controller"
 
 module Prattle
   class TopicsController < ApplicationController
-    before_action :set_topic, only: [:show, :edit, :update, :destroy]
+    before_action :set_topic, only: [:show, :edit, :update, :destroy, :lock, :unlock]
     after_action :update_topic_read_up_to_mark, only: [:show, :create]
     after_action :increment_topic_views, only: [:show]
 
@@ -30,12 +30,25 @@ module Prattle
       @post = @topic.posts.build
       @posts = Post.where("topic_id = " + @topic.id.to_s).paginate(:page => params[:page], :per_page => 25)
     end
+
+    def lock
+      @topic.locked = true
+      @topic.save
+      redirect_to :back, :flash => {:success => "Topic locked"}
+    end
+
+    def unlock
+      @topic.locked = false
+      @topic.save
+      redirect_to :back, :flash => {:success => "Topic unlocked"}
+    end
  
 	private
 
       # Use callbacks to share common setup or constraints between actions.
       def set_topic
-        @topic = Topic.find(params[:id])
+        @topic = Topic.find(params[:id]) if params[:id]
+        @topic = Topic.find(params[:topic_id]) if params[:topic_id]
       end
 
       def update_topic_read_up_to_mark

@@ -18,6 +18,14 @@ module Prattle
   		self.save!
   	end
 
+    def formatted_subject
+      result = self.subject
+      if self.locked
+        result = '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>'.html_safe + result
+      end
+      result
+    end
+
   	private
   		def defaults
   			self.view_count = 0 if new_record?
