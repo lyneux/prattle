@@ -12,6 +12,8 @@ Prattle::Engine.routes.draw do
   	end
   end
 
+  resource :member_setting, only: [:edit, :update]
+
   get '/recent_topics', to: 'forums#show_recent_topics', as: 'show_recent_topics'
 	
 end

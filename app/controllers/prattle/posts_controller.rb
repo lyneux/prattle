@@ -1,11 +1,15 @@
 require_dependency "prattle/application_controller"
 
 include Prattle::ApplicationHelper
+include Prattle::MemberSettingsHelper
+include Prattle::NotificationsHelper
 
 module Prattle
   class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :can_edit?, only: [:edit, :update]
+    after_action :update_post_count, only: [:create]
+    after_action :send_notifications, only: [:create]
 
     def new
       @topic = Topic.find(params[:topic_id])
@@ -39,6 +43,8 @@ module Prattle
 
     def update
       if params[:preview]
+        #puts "PREVIEW!!!"        
+        #render :preview
         @topic = Topic.find(params[:topic_id])
         @post.text = post_params[:text]
         render :edit

@@ -1,0 +1,14 @@
+Hello <%= @user.forename %>,
+
+<%= @post.user.forename %> <%= @post.user.surname %> has posted to the London Mountaineering Club forum that you requested notifications for:
+
+SUBJECT:
+<%= @post.topic.subject %>.
+
+MESSAGE:
+<%= @post.text %>
+
+You can view the most recent forum posts here: http://www.londonmountaineeringclub.com/forums/recent_topics
+
+IMPORTANT: Remember, this is just a notification. Please do not reply to this email.
+To change your notification settings, please visit: http://www.londonmountaineeringclub.com/forums/member_setting/edit

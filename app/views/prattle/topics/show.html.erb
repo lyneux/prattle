@@ -2,9 +2,7 @@
 	<%= link_to "Forums", prattle.root_path %> /
 	<%= link_to @topic.forum.category.name, @topic.forum.category %> /
 	<%= link_to @topic.forum.name, [@topic.forum.category, @topic.forum] %>
-	<div class="pull-right">
-		<%= link_to 'Recent Posts', show_recent_topics_path, class: "btn btn-sm btn-default" %>
-	</div>
+	<%= render "prattle/shared/menu" %>
 </h6>
 <h1 style="margin-top:0px">
 	<%= @topic.formatted_subject %>

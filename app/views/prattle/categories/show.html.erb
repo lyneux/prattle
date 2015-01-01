@@ -1,8 +1,6 @@
 <h6>
 	<%= link_to "Forums", prattle.root_path %>
-	<div class="pull-right">
-		<%= link_to 'Recent Posts', show_recent_topics_path, class: "btn btn-sm btn-default" %>
-	</div>
+	<%= render "prattle/shared/menu" %>
 <h6>
 <h1 style="margin-top:0px"><%= @category.name %></h1>
 

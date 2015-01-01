@@ -1,0 +1,48 @@
+<h1>Personal Forum Settings</h1>
+
+<%= form_for [@member_settings], :html => { :class => "form-horizontal", :role => "form"} do |f| %>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Personal Statistics</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <%= f.label :post_count, "Number of posts", class: "col-xs-6 control-label" %>
+            <div class="col-xs-6" style="padding-top: 7px;"><%= @member_settings.post_count %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Notification Settings</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <%= f.label :notify_all, "Notify me by email for all new posts", class: "col-xs-6 control-label" %>
+            <div class="col-xs-6">
+              <%= f.check_box :notify_all, class: "form-control" %>
+              <%= f.submit "Save Changes", class:  "btn btn-xs btn-default" %>
+            </div>
+
+            <%= f.label "Email notifications will be sent to the address configured in your profile", class: "col-xs-6 control-label" %>
+            <div class="col-xs-6" style="padding-top: 7px;">
+               <%= prattle_user.email %>
+            </div>          
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <%= link_to 'Back to Forum Home', root_path, class: "btn btn-sm btn-primary" %>
+
+<% end %>
+
+
