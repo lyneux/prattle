@@ -34,5 +34,16 @@ namespace :prattle do
 
 	end
 
+	desc "Sends post notifications"
+	task :send_post_notifications => :environment do
+		notifications = Prattle::PostNotifications.where(:sent => false)
+		notifications.each do |notification|
+			puts "Sending a notification for post " + notification.post.id.to_s + " to: " + notification.user.forename + " " + notification.user.surname
+			Prattle::PostNotificationMailer.notify_of_new_post(notification.post.id, notification.user.id).deliver
+			notification.sent = true
+			notification.save
+		end
+	end
+
 end
 
