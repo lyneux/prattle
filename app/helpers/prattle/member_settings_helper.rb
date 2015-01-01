@@ -10,10 +10,9 @@ module Prattle
     end
 
     def update_post_count
-      member_settings = prattle_user.prattle_member_settings
-      initialise_member_settings if member_settings.nil?
-      member_settings.post_count += 1
-      member_settings.save
+      initialise_member_settings if prattle_user.prattle_member_settings.nil?
+      prattle_user.prattle_member_settings.post_count += 1
+      prattle_user.prattle_member_settings.save
     end
 
   end
