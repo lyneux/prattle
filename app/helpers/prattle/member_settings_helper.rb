@@ -11,7 +11,7 @@ module Prattle
 
     def update_post_count
       member_settings = prattle_user.prattle_member_settings
-      member_settings = initialise_member_settings unless member_settings
+      initialise_member_settings if member_settings.nil?
       member_settings.post_count += 1
       member_settings.save
     end
