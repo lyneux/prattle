@@ -1,10 +1,15 @@
 require_dependency "prattle/application_controller"
 
+include Prattle::MemberSettingsHelper
+include Prattle::NotificationsHelper
+
 module Prattle
   class TopicsController < ApplicationController
     before_action :set_topic, only: [:show, :edit, :update, :destroy, :lock, :unlock]
     after_action :update_topic_read_up_to_mark, only: [:show, :create]
     after_action :increment_topic_views, only: [:show]
+    after_action :update_post_count, only: [:create]
+    after_action :send_notifications, only: [:create]
 
     def new
       @topic = Topic.new
