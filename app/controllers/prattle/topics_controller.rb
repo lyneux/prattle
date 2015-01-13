@@ -57,16 +57,18 @@ module Prattle
       end
 
       def update_topic_read_up_to_mark
-        topic_read_up_to_mark = Prattle::TopicReadUpToMark.find_or_initialize_by(topic_id: @topic.id, user_id: prattle_user.id)
-        if @posts.nil?
-          #We've just done a create. Assume that the whole topic is read
-          topic = Prattle::Topic.find_by(id: @topic.id)
-          topic_read_up_to_mark.post = topic.posts.last
-        else
-          #Assume we've only read to the end of the current page of posts
-          topic_read_up_to_mark.post = @posts.last
+        if prattle_user
+          topic_read_up_to_mark = Prattle::TopicReadUpToMark.find_or_initialize_by(topic_id: @topic.id, user_id: prattle_user.id)
+          if @posts.nil?
+            #We've just done a create. Assume that the whole topic is read
+            topic = Prattle::Topic.find_by(id: @topic.id)
+            topic_read_up_to_mark.post = topic.posts.last
+          else
+            #Assume we've only read to the end of the current page of posts
+            topic_read_up_to_mark.post = @posts.last
+          end
+          topic_read_up_to_mark.save
         end
-        topic_read_up_to_mark.save
       end
 
       def increment_topic_views

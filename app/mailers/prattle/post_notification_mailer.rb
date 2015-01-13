@@ -1,3 +1,5 @@
+include Prattle::ForumsHelper
+
 module Prattle
   class PostNotificationMailer < ActionMailer::Base
     default from: "website@londonmountaineeringclub.com"

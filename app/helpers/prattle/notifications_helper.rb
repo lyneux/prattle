@@ -1,3 +1,5 @@
+include Prattle::ForumsHelper
+
 module Prattle
   module NotificationsHelper
 

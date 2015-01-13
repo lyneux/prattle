@@ -38,5 +38,15 @@ module Prattle
 
     end
 
+    def path_to_post(post)
+      topic_position = post.topic_position
+      page = ((topic_position/25)+1).floor
+      category_forum_topic_url(:category_id => post.topic.forum.category.id,
+                                      :forum_id => post.topic.forum.id,
+                                      :id => post.topic.id,
+                                      :page => page.to_s,
+                                      :anchor => "post" + topic_position.to_s)
+    end
+
   end
 end
