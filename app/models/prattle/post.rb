@@ -13,6 +13,12 @@ module Prattle
       page = (((self.topic_position-1)/25)+1).floor
     end
 
+    def image
+      user = self.user
+      user = Prattle.user_class.new unless user
+      user.prattle_image.url(:thumb)
+    end
+
   	private
   		def set_topic_position
   			if self.new_record?

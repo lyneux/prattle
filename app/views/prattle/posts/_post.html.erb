@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="user col-md-2">
 				<%= post.created_at.strftime("%d %b %Y") %> - <%= post.created_at.strftime("%H:%M") %>
-				<%= image_tag post.user.prattle_image.url(:thumb), :class => "img-rounded img-responsive", :style => "margin-top: 5px;" %>
+				<%= image_tag post.image, :class => "img-rounded img-responsive", :style => "margin-top: 5px;" %>
 			</div>
 			<div class="user col-md-7">
 				<%= format_post_text(post.text) %>
