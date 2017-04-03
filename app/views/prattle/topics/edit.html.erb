@@ -1,0 +1,32 @@
+<h1>Edit Topic</h1>
+
+<%= form_for([@topic.forum.category, @topic.forum, @topic],  :html => { :class => "form-horizontal", :role => "form" }) do |f| %>
+<% if @topic.errors.any? %>
+  <div id="errorExplanation" class="alert alert-danger" style="padding-top: 0px;">
+    <h3><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h3>
+    <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <div class="form-group">
+    <%= f.label :subject, class: "col-xs-4 control-label"  %>
+    <div class="col-xs-8"><%= f.text_field :subject, class: "form-control" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :forum, class: "col-xs-4 control-label"  %>
+    <div class="col-xs-8"><%= f.collection_select :forum_id, Prattle::Forum.all, :id, :name, {:include_blank => true}, :class => "form-control" %></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pinned, class: "col-xs-4 control-label"  %>
+    <div class="col-xs-6"><%= f.check_box :pinned, class: "form-control" %></div>
+  </div>
+
+  <%= f.submit class: "btn btn-sm btn-primary" %>
+
+<% end %>

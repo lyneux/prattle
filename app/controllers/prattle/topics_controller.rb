@@ -31,6 +31,16 @@ module Prattle
       redirect_to [@forum.category, @forum], :flash => {:success => "Topic created"}
     end
 
+    def edit
+      @topic = Topic.find(params[:id])
+    end
+
+    def update
+      @topic.update(topic_params)
+      @topic.save
+      redirect_to [@topic.forum.category, @topic.forum, @topic], :flash => {:success => "Topic updated"}
+    end
+
     def show
       @post = @topic.posts.build
       @posts = Post.where("topic_id = " + @topic.id.to_s).order(created_at: :asc).paginate(:page => params[:page], :per_page => 25)
@@ -77,7 +87,7 @@ module Prattle
       end
 
   		def topic_params
-    		params.require(:topic).permit(:subject)
+    		params.require(:topic).permit(:subject, :forum_id, :pinned)
   		end
 
       def post_params
