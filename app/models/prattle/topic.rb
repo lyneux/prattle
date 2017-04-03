@@ -21,7 +21,10 @@ module Prattle
     def formatted_subject
       result = self.subject
       if self.locked
-        result = '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>'.html_safe + result
+        result = '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span> '.html_safe + result
+      end
+      if self.pinned
+        result = '<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> '.html_safe + result
       end
       result
     end
