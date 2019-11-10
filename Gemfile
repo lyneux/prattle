@@ -13,6 +13,7 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'rails', '4.2.10'
 gem 'will_paginate-bootstrap'
 gem 'sanitize'
 gem 'bb-ruby'

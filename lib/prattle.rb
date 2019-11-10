@@ -6,7 +6,7 @@ require 'decorators'
 require 'paperclip'
 
 module Prattle
-	mattr_accessor :user_class, :current_user_method, :single_category_site
+	mattr_accessor :user_class, :current_user_method, :single_category_site, :forum_name
 
 	class << self
 		def user_class

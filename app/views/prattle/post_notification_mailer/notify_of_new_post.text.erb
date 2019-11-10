@@ -1,6 +1,6 @@
 Hello <%= @user.forename %>,
 
-<%= @post.user.forename %> <%= @post.user.surname %> has posted to the London Mountaineering Club forum that you requested notifications for:
+<%= @post.user.forename %> <%= @post.user.surname %> has posted to <%= Prattle.forum_name %> forum that you requested notifications for:
 
 SUBJECT:
 <%= @post.topic.subject %>.
@@ -11,4 +11,4 @@ MESSAGE:
 You can view the post here: <%= path_to_post(@post) %>
 
 IMPORTANT: Remember, this is just a notification. Please do not reply to this email.
-To change your notification settings, please visit: http://www.londonmountaineeringclub.com/forums/member_setting/edit
+To change your notification settings, please visit: <%= edit_member_setting_url %>
