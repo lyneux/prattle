@@ -41,7 +41,9 @@
 		      	<% unless @forum %>
 		      		Posted in: <%= link_to topic.forum.name %><br/>
 		      	<% end %>
-		      	Started by <%= topic.posts.first.user %>, <%= topic.posts.first.created_at.strftime("%d %B %Y") %>
+		      	<% if topic.posts.first %>
+		      		Started by <%= topic.posts.first.user %>, <%= topic.posts.first.created_at.strftime("%d %B %Y") %>
+		      	<% end %>
 		      </td>
 		      <td>Last post by <%= topic.posts.last.user if topic.posts.last %><br/>
 		      	on <%= topic.posts.last.created_at.strftime("%d %B %Y") if topic.posts.last %> - 

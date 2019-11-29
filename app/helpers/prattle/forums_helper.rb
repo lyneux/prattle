@@ -3,15 +3,20 @@ module Prattle
 
   	def show_new_marker(topic, user)
       read_up_to_post = topic.read_up_to_post(user)
-  		if read_up_to_post && topic.posts
-  			if topic.posts.last.topic_position == read_up_to_post.post.topic_position
-  				false
-  			else
-  				true
-  			end
-  		else
-  			true
-  		end
+      puts "topic.posts:" + topic.posts.count.to_s
+      if topic.posts && !topic.posts.empty?
+    		if read_up_to_post
+    			if topic.posts.last.topic_position == read_up_to_post.post.topic_position
+            false
+    			else
+    				true
+    			end
+    		else
+    			true
+    		end
+      else
+        false
+      end
   	end
 
     def link_to_latest_unread_post(topic, user)
@@ -26,9 +31,9 @@ module Prattle
         end
       end
 
-      #Work out which page the next unread post is on
+      # Work out which page the next unread post is on
       page = ((latest_unread_post/25)+1).floor
-
+      
       display_string = (topic.posts.last.topic_position - latest_unread_post + 1).to_s + " new"
       return link_to display_string, category_forum_topic_path(:category_id => topic.forum.category.id,
                                                :forum_id => topic.forum.id,
